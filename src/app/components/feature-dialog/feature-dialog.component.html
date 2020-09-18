@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>
+  {{service.form.controls['id'].value ? "Update Feature" : "Create Feature"}}
+</h1>
+<br>
+<form [formGroup]="service.form" (submit)="onSubmit()">
+  <div mat-dialog-content>
+    <input type="hidden" formControlName="id">
+    <input type="hidden" formControlName="inverted">
+    <mat-form-field>
+      <mat-label>Technical Name*</mat-label>
+      <input matInput formControlName="technicalName">
+      <mat-error>This field is mandatory</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Display Name</mat-label>
+      <input matInput formControlName="displayName">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Expire date</mat-label>
+      <input matInput type="datetime-local" formControlName="expire">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Customers*</mat-label>
+      <input matInput formControlName="customerIds" placeholder="1,2,3">
+      <mat-error *ngIf="service.form.controls['customerIds'].errors?.required">This field is mandatory</mat-error>
+      <mat-error *ngIf="service.form.controls['customerIds'].errors?.pattern">Only digits and comma</mat-error>
+    </mat-form-field>
+    <br>
+  </div>
+  <div mat-dialog-actions align="end">
+    <div>
+      <button mat-button type="submit" [disabled]="service.form.invalid">
+        {{service.form.controls['id'].value ? "Update" : "Create"}}
+      </button>
+      <button mat-button (click)="onClose()">Close</button>
+    </div>
+  </div>
+</form>
+

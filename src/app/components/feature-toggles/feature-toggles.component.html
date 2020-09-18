@@ -1,0 +1,56 @@
+<div>
+  <button mat-raised-button (click)="onCreate()">
+    <mat-icon>add</mat-icon>
+    Add Feature
+  </button>
+</div>
+<div>
+  <table mat-table [dataSource]="listData">
+    <ng-container matColumnDef="inverted">
+      <th mat-header-cell *matHeaderCellDef>Inverted</th>
+      <td mat-cell *matCellDef="let toggle">
+        <mat-slide-toggle [checked]=toggle.inverted (toggleChange)="onToggle(toggle)"></mat-slide-toggle>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="technicalName">
+      <th mat-header-cell *matHeaderCellDef> Technical Name</th>
+      <td mat-cell *matCellDef="let toggle"> {{toggle.technicalName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="displayName">
+      <th mat-header-cell *matHeaderCellDef>Display Name</th>
+      <td mat-cell *matCellDef="let toggle"> {{toggle.displayName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let toggle"> {{toggle.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expire">
+      <th mat-header-cell *matHeaderCellDef>Expire Date</th>
+      <td mat-cell *matCellDef="let toggle"> {{toggle.expire}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="customerIds">
+      <th mat-header-cell *matHeaderCellDef>Customers</th>
+      <td mat-cell *matCellDef="let toggle"> {{toggle.customerIds}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="onEdit(row)">
+          <mat-icon>launch</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onArchive(row.id)">
+          <mat-icon>archive</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
